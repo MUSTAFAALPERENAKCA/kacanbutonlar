@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Butonlar</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: blue;
+        color: aliceblue;
+      }
+    </style>
+  </head>
+  <body onLoad="changeIt();" onClick="moveIt();">
+    <div class="container">
+      <div class="header mt-5 text-center">
+        SON GÜNLERDE SENİ ÜZMELERİMİ UNUTUP ESKİYE DÖNEBİLİR MİYİZZZ?
+      </div>
+      <div class="row justify-content-center mt-3">
+        <span id="button1" style="position: relative; z-index: 10"></span>
+        <div class="col-md-6 text-center">
+          <img
+            src="RESİM.jpg"
+            alt="İREM RESMİ"
+            class="img-fluid"
+            style="margin: 20px"
+          />
+          <!-- resim -->
+        </div>
+        <span id="button2" style="position: relative; z-index: 10"></span>
+      </div>
+    </div>
+
+    <script>
+      var btnbgcol = "#c5cb98";
+      var fntcol = "#000066";
+      var ok = document.getElementById || document.all ? 1 : 0;
+      if (ok) {
+        var cross_el1 = document.getElementById
+          ? document.getElementById("button1")
+          : button1;
+        var cross_el2 = document.getElementById
+          ? document.getElementById("button2")
+          : button2;
+      }
+      var messageNo = "Hayır";
+      var messageYes = "Evet";
+
+      function changeIt() {
+        if (!ok) return;
+        cross_el1.innerHTML =
+          '<button style="background-color:' +
+          btnbgcol +
+          '" onmousedown="moveIt();" onmouseover="moveIt()"><font color="' +
+          fntcol +
+          '">' +
+          messageNo +
+          "</font></button>";
+        cross_el2.innerHTML =
+          '<button style="background-color:' +
+          btnbgcol +
+          '" onclick="showThankYou();"><font color="' +
+          fntcol +
+          '">' +
+          messageYes +
+          "</font></button>";
+      }
+
+      function setRandom() {
+        random1 = Math.floor(Math.random() * 301);
+        random2 = Math.floor(Math.random() * 401);
+      }
+
+      function moveIt() {
+        if (!ok) return;
+        setRandom();
+        cross_el1.style.top = random1 + "px";
+        cross_el1.style.left = random2 + "px";
+        if (document.all) {
+          if (
+            cross_el1.offsetTop - document.body.scrollTop >
+            document.body.clientHeight
+          )
+            cross_el1.style.top = random1 * (-2 / 3) + "px";
+        } else {
+          if (cross_el1.offsetTop - window.pageYOffset > window.innerHeight)
+            cross_el1.style.top = random1 * (-2 / 3) + "px";
+        }
+      }
+
+      function showThankYou() {
+        alert("Bu cevabı alacağımı biliyordum. Teşekkürler!"); // Teşekkür uyarısı
+      }
+    </script>
+  </body>
+</html>
